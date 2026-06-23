@@ -37,7 +37,7 @@ def get_gist_state():
     try:
         res = requests.get(url, headers=headers, timeout=15)
         if res.status_code == 200:
-            return json.loads(res.json()["files"]["cache.json"]["content"])
+            return json.loads(res.json()["files"]["comicUpdate.json"]["content"])
     except Exception:
         pass
     return {}
@@ -48,7 +48,7 @@ def update_gist_state(state):
         "Accept": "application/vnd.github+json"
     }
     url = f"https://api.github.com/gists/{GIST_ID}"
-    payload = {"files": {"cache.json": {"content": json.dumps(state, indent=4)}}}
+    payload = {"files": {"comicUpdate.json": {"content": json.dumps(state, indent=4)}}}
     try:
         requests.patch(url, headers=headers, json=payload, timeout=15)
     except Exception:
